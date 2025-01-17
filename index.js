@@ -35,7 +35,7 @@ app.use(cors({
     "http://localhost:3001",
     "https://banao-jo4i.onrender.com"
   ],
-  methods: ["GET", "POST", "PATCH", "DELETE", "PUT"],
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
 }));
