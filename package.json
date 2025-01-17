@@ -14,7 +14,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.7.0",
     "morgan": "^1.10.0",
-    "multer": "^1.4.5-lts.1",
+    "multer": "1.4.4",
     "multer-gridfs-storage": "^5.0.2"
   },
   "devDependencies": {
@@ -22,6 +22,7 @@
   },
   "scripts": {
     "start": "node index.js",
+    "build": "npm install --legacy-peer-deps",
     "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
