@@ -1,0 +1,154 @@
+{
+  "auth": {
+    "register": {
+      "method": "POST",
+      "url": "http://localhost:3001/auth/register",
+      "headers": {
+        "Content-Type": "multipart/form-data"
+      },
+      "body": {
+        "firstName": "John",
+        "lastName": "Doe",
+        "email": "john@example.com",
+        "password": "password123",
+        "location": "New York, NY",
+        "occupation": "Software Engineer",
+        "username": "johndoe",
+        "picture": "[file upload]"
+      }
+    },
+    "login": {
+      "method": "POST",
+      "url": "http://localhost:3001/auth/login",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "usernameOrEmail": "johndoe OR john@example.com",
+        "password": "password123"
+      }
+    },
+    "forgotPassword": {
+      "method": "POST",
+      "url": "http://localhost:3001/auth/forgot-password",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "email": "john@example.com",
+        "newPassword": "newpassword123"
+      }
+    }
+  },
+  "users": {
+    "getUser": {
+      "method": "GET",
+      "url": "http://localhost:3001/users/:userId",
+      "headers": {
+        "Authorization": "Bearer [your_jwt_token]"
+      }
+    },
+    "getUserFriends": {
+      "method": "GET",
+      "url": "http://localhost:3001/users/:userId/friends",
+      "headers": {
+        "Authorization": "Bearer [your_jwt_token]"
+      }
+    },
+    "addRemoveFriend": {
+      "method": "PATCH",
+      "url": "http://localhost:3001/users/:userId/:friendId",
+      "headers": {
+        "Authorization": "Bearer [your_jwt_token]"
+      }
+    }
+  },
+  "posts": {
+    "createPost": {
+      "method": "POST",
+      "url": "http://localhost:3001/posts",
+      "headers": {
+        "Authorization": "Bearer [your_jwt_token]",
+        "Content-Type": "multipart/form-data"
+      },
+      "body": {
+        "userId": "64f8a3b5c82b1234567890",
+        "description": "This is my new post!",
+        "picture": "[file upload]"
+      }
+    },
+    "updatePost": {
+      "method": "PATCH",
+      "url": "http://localhost:3001/posts/:id",
+      "headers": {
+        "Authorization": "Bearer [your_jwt_token]",
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "description": "Updated post content"
+      }
+    },
+    "deletePost": {
+      "method": "DELETE",
+      "url": "http://localhost:3001/posts/:id",
+      "headers": {
+        "Authorization": "Bearer [your_jwt_token]"
+      }
+    },
+    "getFeedPosts": {
+      "method": "GET",
+      "url": "http://localhost:3001/posts",
+      "headers": {
+        "Authorization": "Bearer [your_jwt_token]"
+      }
+    },
+    "getUserPosts": {
+      "method": "GET",
+      "url": "http://localhost:3001/posts/:userId/posts",
+      "headers": {
+        "Authorization": "Bearer [your_jwt_token]"
+      }
+    },
+    "likePost": {
+      "method": "PATCH",
+      "url": "http://localhost:3001/posts/:id/like",
+      "headers": {
+        "Authorization": "Bearer [your_jwt_token]",
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "userId": "64f8a3b5c82b1234567890"
+      }
+    },
+    "addComment": {
+      "method": "PATCH",
+      "url": "http://localhost:3001/posts/:id/comment",
+      "headers": {
+        "Authorization": "Bearer [your_jwt_token]",
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "userId": "64f8a3b5c82b1234567890",
+        "comment": "This is a great post!"
+      }
+    },
+    "updateComment": {
+      "method": "PATCH",
+      "url": "http://localhost:3001/posts/:id/comments/:commentId",
+      "headers": {
+        "Authorization": "Bearer [your_jwt_token]",
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "comment": "Updated comment content"
+      }
+    },
+    "deleteComment": {
+      "method": "DELETE",
+      "url": "http://localhost:3001/posts/:id/comments/:commentId",
+      "headers": {
+        "Authorization": "Bearer [your_jwt_token]"
+      }
+    }
+  }
+}
