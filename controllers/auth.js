@@ -52,18 +52,22 @@ export const register = async (req, res) => {
 /* LOGGING IN */
 export const login = async (req, res) => {
   try {
-    const { email, username, password } = req.body;
+    const { usernameOrEmail, password } = req.body;
+
+    if (!usernameOrEmail || !password) {
+      return res.status(400).json({ message: "Please provide all required fields." });
+    }
 
     // Find user by email or username
     const user = await User.findOne({
       $or: [
-        { email: email },
-        { username: username }
+        { email: usernameOrEmail },
+        { username: usernameOrEmail }
       ]
     });
 
     if (!user) {
-      return res.status(400).json({ message: "User does not exist." });
+      return res.status(400).json({ message: "User not found." });
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
@@ -72,11 +76,29 @@ export const login = async (req, res) => {
     }
 
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
-    delete user.password;
+    
+    // Create a sanitized user object without password
+    const userResponse = {
+      _id: user._id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      username: user.username,
+      picturePath: user.picturePath,
+      friends: user.friends,
+      location: user.location,
+      occupation: user.occupation,
+      viewedProfile: user.viewedProfile,
+      impressions: user.impressions,
+    };
 
-    res.status(200).json({ token, user });
+    res.status(200).json({ 
+      token, 
+      user: userResponse
+    });
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    console.error("Login error:", err);
+    res.status(500).json({ message: "Internal server error" });
   }
 };
 
